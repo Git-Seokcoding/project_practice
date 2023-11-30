@@ -8,9 +8,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link href="${pageContext.request.contextPath }/css/seat_select.css" rel="stylesheet" type="text/css">
-    <link href="${pageContext.request.contextPath }/css/default.css" rel="stylesheet" type="text/css">
-
+ 	<style>
+ 		.seat {
+		    width: 30px;
+		    height: 30px;
+ 		    background-color: #ccc; 
+ 		    margin: 5px; 
+		    display: inline-block;
+		    cursor: pointer;
+	    }
+	    .selected {
+	    	background-color: red;
+	    }
+ 	</style>
  	<script>
 	    function toggleSeat(seat) {
 	        seat.classList.toggle("selected");
@@ -31,21 +41,43 @@
 	        // 선택된 좌석 값을 숨겨진 input 요소에 할당
 	        document.getElementById("select_seat").value = selectedSeatValues.join(",");
 	    }
+	    
 	    function back(){
 	    	history.back();
-	    	
 	    }
  	
+ 	
+ 	// ----------------------
+// 	    function toggleSeat(seat) {
+// 	      seat.classList.toggle("selected");
+// 	      seat.setAttribute("value", seat.getAttribute("value") +"선택됨");
+// 	      displaySelectedSeats(); // 좌석 선택 시 선택된 좌석을 출력하는 함수 호출
+// 	    }
+// 	    function displaySelectedSeats() {
+// 	        var selectedSeats = document.getElementsByClassName("selected");
+// 	        var selectedSeatValues = "";
+// 	        for (var i = 0; i < selectedSeats.length; i++) {
+// 	          selectedSeatValues += selectedSeats[i].getAttribute("value") + " ";
+// 	        }
+// 	        var selectedSeatsElement = document.getElementById("selected_seats");
+// 	        selectedSeatsElement.textContent = "선택된 좌석: " + selectedSeatValues;
+// 	      }
+	    
  	</script>
 </head>
 <body>
+<%request.setCharacterEncoding("UTF-8"); %> 
+	<div id="wrapper"><%--CSS 요청으로 감싼 태그--%>
 	<header>
 			<jsp:include page="/inc/top.jsp"></jsp:include>
 	</header>
+	<section id="content"><%--CSS 요청으로 감싼 태그--%>
+	
 	<article>
 		<table class="table">
 			<tr>
 				<td colspan="6">인원 / 좌석</td>
+				<td>가져온 데이터 : ${select_params}</td>
 			<tr>	
 			<tr>
 				<th colspan="3">
@@ -67,12 +99,12 @@
 			
 		</table>
 		<div class="">
-		    <div class="right">
+		    <div>
 					선택된 데이터<br>
-					영화 : ${movie}<br>
-					극장 : ${Theater}<br>
-					날짜 : ${Date} <br>
-					시간 : ${Time} <br>
+					영화 : ${param.movie}<br>
+					극장 : ${param.theater}<br>
+					날짜 : ${param.date} <br>
+					시간 : ${param.time} <br>
 		    </div>
 	    </div>
 		<c:set var="x" value="${fn:split(' A,B,C,D,E,F,G,H,I,J,K', ',')}" /><!--행을결정지을 변수 x 선언-->
@@ -113,11 +145,12 @@
 				</tr>
 			</table>
 	</article>
+	</section><%--CSS 요청으로 감싼 태그--%>
 	<footer>
 			<jsp:include page="/inc/bottom.jsp"></jsp:include>
 	</footer>
 
-
+	</div> <%--CSS 요청으로 감싼 태그--%>
 </body>
 </html>
 
