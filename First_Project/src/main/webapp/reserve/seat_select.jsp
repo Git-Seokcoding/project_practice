@@ -7,7 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+	<title>좌석 선택</title>
+    <link href="${pageContext.request.contextPath }/css/reserve.css" rel="stylesheet" type="text/css">
+
  	<style>
  		.seat {
 		    width: 30px;
@@ -27,6 +29,23 @@
 	        displaySelectedSeats(); // 좌석 선택 시 선택된 좌석을 출력하는 함수 호출
 	    }
 	    
+	    function toggleNum(num){
+	        // 클릭된 요소가 속한 행을 찾음
+	        var row = num.parentNode.parentNode;
+
+	        // 해당 행의 모든 .NumOfPeo 요소를 찾음
+	        var elements = row.querySelectorAll('.NumOfPeo');
+
+	        // 모든 .NumOfPeo 요소에서 'selected' 클래스를 제거
+	        elements.forEach(function(element) {
+	            element.classList.remove('selected');
+	        });
+
+	        // 클릭된 요소에만 'selected' 클래스를 추가
+	        num.classList.add('selected');
+	        displaySelectedSeats(); // 인원 선택 시 선택된 인원을 출력하는 함수 호출
+	    }
+	    
 	    function displaySelectedSeats() {
 	        var selectedSeats = document.getElementsByClassName("selected");
 	        var selectedSeatValues = [];
@@ -36,7 +55,7 @@
 	        }
 	        
 	        var selectedSeatsElement = document.getElementById("selected_seats");
-	        selectedSeatsElement.textContent = "선택된 좌석: " + selectedSeatValues.join(", ");
+	        selectedSeatsElement.textContent = selectedSeatValues.join(", ") + " 선택됨";
 	        
 	        // 선택된 좌석 값을 숨겨진 input 요소에 할당
 	        document.getElementById("select_seat").value = selectedSeatValues.join(",");
@@ -47,108 +66,109 @@
 	    }
  	
  	
- 	// ----------------------
-// 	    function toggleSeat(seat) {
-// 	      seat.classList.toggle("selected");
-// 	      seat.setAttribute("value", seat.getAttribute("value") +"선택됨");
-// 	      displaySelectedSeats(); // 좌석 선택 시 선택된 좌석을 출력하는 함수 호출
-// 	    }
-// 	    function displaySelectedSeats() {
-// 	        var selectedSeats = document.getElementsByClassName("selected");
-// 	        var selectedSeatValues = "";
-// 	        for (var i = 0; i < selectedSeats.length; i++) {
-// 	          selectedSeatValues += selectedSeats[i].getAttribute("value") + " ";
-// 	        }
-// 	        var selectedSeatsElement = document.getElementById("selected_seats");
-// 	        selectedSeatsElement.textContent = "선택된 좌석: " + selectedSeatValues;
-// 	      }
-	    
  	</script>
 </head>
 <body>
 <%request.setCharacterEncoding("UTF-8"); %> 
 	<div id="wrapper"><%--CSS 요청으로 감싼 태그--%>
-	<header>
-			<jsp:include page="/inc/top.jsp"></jsp:include>
-	</header>
-	<section id="content"><%--CSS 요청으로 감싼 태그--%>
 	
-	<article>
-		<table class="table">
-			<tr>
-				<td colspan="6">인원 / 좌석</td>
-				<td>가져온 데이터 : ${select_params}</td>
-			<tr>	
-			<tr>
-				<th colspan="3">
-					<div class="" onclick="togglePerson(this)" value=""></div>
-					
-				</th>
-				<th colspan="3">CGV서면삼정타워 | 3관 11층 | 남은좌석 100/120<br><b>예매날짜,시각</b></th>
-			</tr>
-			
-			<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>5</td>
-			</tr>
-			
-			
-		</table>
-		<div class="">
-		    <div>
-					선택된 데이터<br>
-					영화 : ${param.movie}<br>
-					극장 : ${param.theater}<br>
-					날짜 : ${param.date} <br>
-					시간 : ${param.time} <br>
-		    </div>
-	    </div>
-		<c:set var="x" value="${fn:split(' A,B,C,D,E,F,G,H,I,J,K', ',')}" /><!--행을결정지을 변수 x 선언-->
-	    <h1 class="center">Screen</h1>
-		<c:forEach var="i" begin="0" end="${fn:length(x)-1}">		<!--행을 반복할 반복문 선언-->
-	    	<div class="center">
-		 	<c:forEach var="j" begin="1" end="16">
-		    	<c:set var="seat_type" value="${x[i]}${j}" />
-		    	<div class="seat ${j}" onclick="toggleSeat(this)" value="${seat_type}">${seat_type}</div>
-			</c:forEach><!-- 열반복 종료 -->
-			</div>
-		</c:forEach><!-- 행반복 종료 -->
-			<table class="bottom_info">
-				<tr>
-					<td><input type="button" value="영화선택" onclick="back()"></td>
-					<td>영화포스터 위치</td>
-					<td>
-						선택된 데이터
-						영화 : ${movie}
-						극장 : ${Theater}
-						날짜 : ${Date}
-						시간 : ${Time} 
-					</td>
-					<td>좌석명 좌석번호 | 일반 총금액</td>
-					<td>
-						<h3 id="selected_seats">선택된 좌석: </h3>
-					</td>
-					<td>
-						<form action="../money.jsp" method="post" onsubmit="setSelectedSeatValue()">
-						    <input type="hidden" name="movie" value="${movie}">		    <!-- 선택된 값을 숨겨진 input 요소에 할당 -->
-						    <input type="hidden" name="Theater" value="${Theater}">
-						    <input type="hidden" name="Date" value="${Date}">
-						    <input type="hidden" name="Time" value="${Time}">
-						    <input type="hidden" id="select_seat" name="select_seat" value="">			<!--  선택된 좌석 값 전달 -->	    
-						    <input type="submit" value="결제하기">
-						</form>
-					</td>
-				</tr>
-			</table>
-	</article>
-	</section><%--CSS 요청으로 감싼 태그--%>
-	<footer>
-			<jsp:include page="/inc/bottom.jsp"></jsp:include>
-	</footer>
+		<header>
+				<jsp:include page="../inc/top.jsp"></jsp:include>
+		</header>
+						
+		<div id="menu_nav">
+			<nav>
+				<a href="${pageContext.request.contextPath}/reserve/movie_select.jsp">예매</a>
+				<a href="${pageContext.request.contextPath}/movie/release.jsp">영화</a>
+				<a href="${pageContext.request.contextPath}/theater/theater.jsp">극장정보</a>
+				<a href="${pageContext.request.contextPath}/store/store_main.jsp">스토어</a>
+				<a href="${pageContext.request.contextPath}/event/event_movie.jsp">이벤트</a>
+				<a href="${pageContext.request.contextPath}/cs/cs_main.jsp">고객센터</a>
+			</nav>
+		</div>
+		<hr id="top_hr">
+		
+		
+		<section id="content"><%--CSS 요청으로 감싼 태그--%>
+		
+			<h1 id="h01">좌석선택</h1>
+			<hr>
+			<article id="seat_select">
+				<div id="header_box">
+					<table class="header_box">
+						<tr>
+							<td colspan="6"><h3>인원 / 좌석</h3></td>
+						<tr>	
+						<tr id="height50">
+							<th colspan="3">
+								<table class="hbt">
+									<c:set var="type" value="${fn:split('일반,청소년,경로,우대',',')}" /><!--행을결정지을 변수 x 선언-->
+									<c:forEach var="j" begin="0" end="${fn:length(type)-1}">
+									<tr>
+										<td>
+											${type[j]}
+										</td>
+										<c:forEach var="i" begin="0" end="8">
+										<c:set var="NumOfpeople" value="${type[j]}${i}"/>
+										<td>
+											<div class="NumOfPeo" onclick="toggleNum(this)" value="${NumOfpeople}">${i}</div>
+										</td>
+										</c:forEach>
+									</tr>
+									</c:forEach>
+								</table>
+							</th>
+							<th colspan="3" class="header_box_Runtime">
+								극장 : ${param.theater} ex)3관 11층 ex)남은좌석 100/120<br>
+							 	<b>2023년 12월 ${param.date} ex)상영시간 10:39~13:10</b>
+							 </th>
+						</tr>
+					</table>
+				</div>
+				
+				<div id="seat_num">
+					<c:set var="x" value="${fn:split('A,B,C,D,E,F,G,H,I,J,K', ',')}" /><!--행을결정지을 변수 x 선언-->
+				    <h1 class="center">Screen</h1>
+					<c:forEach var="i" begin="0" end="${fn:length(x)-1}">		<!--행을 반복할 반복문 선언-->
+				    	<div class="center">
+					 	<c:forEach var="j" begin="1" end="16">
+					    	<c:set var="seat_type" value="${x[i]}${j}" />
+					    	<div class="seat ${j}" onclick="toggleSeat(this)" value="${seat_type}">${seat_type}</div>
+						</c:forEach><!-- 열반복 종료 -->
+						</div>
+					</c:forEach><!-- 행반복 종료 -->
+				</div>
+			</article>
+			<article2>				
+				<table id="end_param">
+					<tr>
+						<td class="button_area"><input type="button" value="영화선택" onclick="back()" class="button"></td>
+						<td class="text_left">${param.movie}</td>
+						<td class="text_left">
+							극장 : ${param.theater}<br>
+							날짜 : ${param.date} <br>
+							시간 : ${param.time} <br>
+						</td>
+						<td class="text_left">
+							<h3 id="selected_seats">인원 좌석 선택</h3>
+						</td>
+						<td class="button_area">
+							<form action="../money.jsp" method="post" onsubmit="setSelectedSeatValue()">
+							    <input type="hidden" name="movie" value="${param.movie}">		    <!-- 선택된 값을 숨겨진 input 요소에 할당 -->
+							    <input type="hidden" name="Theater" value="${param.theater}">
+							    <input type="hidden" name="Date" value="${param.date}">
+							    <input type="hidden" name="Time" value="${param.time}">
+							    <input type="hidden" id="select_seat" name="select_seat" value="">			<!--  선택된 좌석 값 전달 -->	    
+							    <input type="submit" value="결제하기" class="button">
+							</form>
+						</td>
+					</tr>
+				</table>
+			</article2>		
+		</section><%--CSS 요청으로 감싼 태그--%>
+		<footer>
+				<jsp:include page="../inc/bottom.jsp"></jsp:include>
+		</footer>
 
 	</div> <%--CSS 요청으로 감싼 태그--%>
 </body>

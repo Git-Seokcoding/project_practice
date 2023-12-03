@@ -110,13 +110,26 @@ $(function() {
 		<header>
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
+						
+		<div id="menu_nav">
+			<nav>
+				<a href="${pageContext.request.contextPath}/reserve/movie_select.jsp">예매</a>
+				<a href="${pageContext.request.contextPath}/movie/release.jsp">영화</a>
+				<a href="${pageContext.request.contextPath}/theater/theater.jsp">극장정보</a>
+				<a href="${pageContext.request.contextPath}/store/store_main.jsp">스토어</a>
+				<a href="${pageContext.request.contextPath}/event/event_movie.jsp">이벤트</a>
+				<a href="${pageContext.request.contextPath}/cs/cs_main.jsp">고객센터</a>
+			</nav>
+		</div>
+		<hr id="top_hr">
+		
 		
 		<section id="content">
-			<h1>1 : 1 문의</h1>
-			
-			<nav id="cs_nav"> <%-- 사이드 메뉴바 --%>
+			<h1 id="h01">1 : 1 문의</h1>
+			<hr>
+			<div id="cs_nav"> <%-- 사이드 메뉴바 --%>
 				<jsp:include page="cs_menubar.jsp"></jsp:include>
-			</nav>
+			</div>
 			
 			<form action="cs_main.jsp" method=""  name="csForm">
 				<p>고객님의 문의에 답변하는 직원은 고객 여러분의 가족 중 한 사람일 수 있습니다.<br>

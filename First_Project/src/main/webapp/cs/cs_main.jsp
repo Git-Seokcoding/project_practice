@@ -13,13 +13,27 @@
 		<header>
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
+						
+		<div id="menu_nav">
+			<nav>
+				<a href="${pageContext.request.contextPath}/reserve/movie_select.jsp">예매</a>
+				<a href="${pageContext.request.contextPath}/movie/release.jsp">영화</a>
+				<a href="${pageContext.request.contextPath}/theater/theater.jsp">극장정보</a>
+				<a href="${pageContext.request.contextPath}/store/store_main.jsp">스토어</a>
+				<a href="${pageContext.request.contextPath}/event/event_movie.jsp">이벤트</a>
+				<a href="${pageContext.request.contextPath}/cs/cs_main.jsp">고객센터</a>
+			</nav>
+		</div>
+		<hr id="top_hr">
+		
+		
 		<section id="content">
 			
-			<h1>고객센터 홈</h1>
-			
-			<nav id="cs_nav"> <%-- 사이드 메뉴바 --%>
+			<h1 id="h01">고객센터 홈</h1>
+			<hr>
+			<div id="cs_nav"> <%-- 사이드 메뉴바 --%>
 				<jsp:include page="cs_menubar.jsp"></jsp:include>
-			</nav>
+			</div>
 			
 			<form action="" method="" name="">
 				<section id="search">
@@ -30,15 +44,15 @@
 				
 				<section id="main_shortcuts"><%-- 바로가기 --%>
 					<a href="cs_lost.jsp">
-						<img src="" alt="분실물 이미지"> <br>
+						<img src="../img/lost.png" alt="분실물 이미지"> <br>
 						분실물 문의 <br>
 					</a>
 					<a href="cs_OneToOne.jsp">
-						<img src="" alt="1:1 이미지"> <br>
+						<img src="../img/1to1.png" alt="1:1 이미지"> <br>
 						1 : 1 문의 <br>
 					</a>
 					<a href="cs_FAQ.jsp">
-						<img src="" alt="FQA 이미지"> <br>
+						<img src="../img/fqa.png" alt="FQA 이미지"> <br>
 						자주 묻는 질문 <br>
 					</a>
 				</section>

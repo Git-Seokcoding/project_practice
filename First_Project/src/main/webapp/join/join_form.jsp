@@ -116,37 +116,58 @@
 <body>
 	<%-- div 태그로 전체를 감싼 후 가운데에 정렬하기 --%>
 	<div id="wrapper">
-		<h1>회원가입</h1> <%-- 제목영역 --%>
-		<section id="join_top"> <%-- 회원가입 진행상황 --%>
-			<span>본인인증</span>
-			<span>약관동의</span>
-			<span id="this">정보입력</span>
-			<span>가입완료</span>		
-		</section>
+		<header>
+			<jsp:include page="../inc/top.jsp"></jsp:include>
+		</header>
+				
+		<div id="menu_nav">
+			<nav>
+				<a href="${pageContext.request.contextPath}/reserve/movie_select.jsp">예매</a>
+				<a href="${pageContext.request.contextPath}/movie/release.jsp">영화</a>
+				<a href="${pageContext.request.contextPath}/theater/theater.jsp">극장정보</a>
+				<a href="${pageContext.request.contextPath}/store/store_main.jsp">스토어</a>
+				<a href="${pageContext.request.contextPath}/event/event_movie.jsp">이벤트</a>
+				<a href="${pageContext.request.contextPath}/cs/cs_main.jsp">고객센터</a>
+			</nav>
+		</div>
+		<hr id="top_hr">
 		
-		<form action="join_completion.jsp" method="post" name="joinForm">
-			<hr>
-			<h3 id="join_top">회원정보입력</h3> <%-- 소제목 --%>
-			<b id="warning">*은 필수</b> <br>
-			<section id="join_center">
-				<input type="text" id="id" name="id" placeholder="*아이디">
-				<input type="button" id="id_check" value="중복확인" onclick="checkId()"> <br>
-				<span id="checkIdResult"></span> <br>
-				<input type="text" id="passwd" name="passwd" placeholder="*비밀번호"> <br>
-				<span id="checkPasswdResult"></span> <br>
-				<input type="text" id="passwd2" name="passwd2" placeholder="*비밀번호확인"> <br>
-				<span id="checkPasswd2Result"></span> <br>
-				<input type="text" id="name" name="name" placeholder="*이름"> <br>
-				<input type="phone" id="phone" name="phone" placeholder="*휴대폰번호"  maxlength="11"> <br>
-				<input type="text" id="email" name="email" placeholder="*이메일주소"> <br>
-				<input type="text" id="birth" name="birth" placeholder="*생년월일" maxlength="8"> <br>
-				<div id="join_button">
-					<input type="button" value="취소"> <%-- 취소하시겠습니까? 메세지 출력 후 메인 페이지로 바로 이동 --%>
-					<input type="submit" value="가입완료"> <%-- 가입이 완료되고 가입완료 메세지 페이지로 이동 --%>
-				</div>
+
+		<section id="content">	
+			<h1 id="h01">회원가입</h1> <%-- 제목영역 --%>
+			<section id="join_top"> <%-- 회원가입 진행상황 --%>
+				<span>본인인증</span>
+				<span>약관동의</span>
+				<span id="this">정보입력</span>
+				<span>가입완료</span>		
 			</section>
-			<hr>
-		</form>
+			
+			<form action="join_completion.jsp" method="post" name="joinForm">
+				<hr>
+				<h3 id="join_top">회원정보입력</h3> <%-- 소제목 --%>
+				<b id="warning">*은 필수</b> <br>
+				<section id="join_center">
+					<input type="text" id="id" name="id" placeholder="*아이디">
+					<input type="button" id="id_check" value="중복확인" onclick="checkId()"> <br>
+					<span id="checkIdResult"></span> <br>
+					<input type="text" id="passwd" name="passwd" placeholder="*비밀번호"> <br>
+					<span id="checkPasswdResult"></span> <br>
+					<input type="text" id="passwd2" name="passwd2" placeholder="*비밀번호확인"> <br>
+					<span id="checkPasswd2Result"></span> <br>
+					<input type="text" id="name" name="name" placeholder="*이름"> <br>
+					<input type="phone" id="phone" name="phone" placeholder="*휴대폰번호"  maxlength="11"> <br>
+					<input type="text" id="email" name="email" placeholder="*이메일주소"> <br>
+					<input type="text" id="birth" name="birth" placeholder="*생년월일" maxlength="8"> <br>
+					<div class="joinbtn">
+						<a href="join_certification.jsp"><input type="button" value="이전"></a>
+						<a href="join_completion.jsp" ><input type="button" value="가입완료"></a>
+					</div>
+				</section>
+			</form>
+		</section>
+		<footer>
+			<jsp:include page="../inc/bottom.jsp"></jsp:include>
+		</footer>
 	</div>
 </body>
 </html>

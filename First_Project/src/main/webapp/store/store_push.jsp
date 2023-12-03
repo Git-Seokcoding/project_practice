@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>스토어 상세페이지</title>
-<link href="${pageContext.request.contextPath }/css/default.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/css/store.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -14,6 +13,20 @@
 		<header>
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
+						
+		<div id="menu_nav">
+			<nav>
+				<a href="${pageContext.request.contextPath}/reserve/movie_select.jsp">예매</a>
+				<a href="${pageContext.request.contextPath}/movie/release.jsp">영화</a>
+				<a href="${pageContext.request.contextPath}/theater/theater.jsp">극장정보</a>
+				<a href="${pageContext.request.contextPath}/store/store_main.jsp">스토어</a>
+				<a href="${pageContext.request.contextPath}/event/event_movie.jsp">이벤트</a>
+				<a href="${pageContext.request.contextPath}/cs/cs_main.jsp">고객센터</a>
+			</nav>
+		</div>
+		<hr id="top_hr">
+		
+		
 		<!-- 전체  -->
 		<section id="content">
 		<!-- 상품정보 -->
@@ -66,8 +79,8 @@
 					</div>	
 					<br>
 					<div id="btn_buy">
-	                       <button type="button">취소</button>
-	                       <button type="button">구매</button>
+	                	<a href="store_main.jsp"><button type="button">취소</button></a>
+	                	<a><button type="button">구매</button></a>
 	               	</div>
 				</div>	
 				<!-- right -->	

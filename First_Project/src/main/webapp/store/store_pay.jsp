@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>스토어 결제 페이지</title>
-<link href="${pageContext.request.contextPath }/css/default.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/css/store.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -13,6 +12,18 @@
 		<header>
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
+						
+		<div id="menu_nav">
+			<nav>
+				<a href="${pageContext.request.contextPath}/reserve/movie_select.jsp">예매</a>
+				<a href="${pageContext.request.contextPath}/movie/release.jsp">영화</a>
+				<a href="${pageContext.request.contextPath}/theater/theater.jsp">극장정보</a>
+				<a href="${pageContext.request.contextPath}/store/store_main.jsp">스토어</a>
+				<a href="${pageContext.request.contextPath}/event/event_movie.jsp">이벤트</a>
+				<a href="${pageContext.request.contextPath}/cs/cs_main.jsp">고객센터</a>
+			</nav>
+		</div>
+		<hr id="top_hr">
 		
 		<section id="content">
 			<!-- 상단 진행도 상태창 -->
@@ -104,9 +115,9 @@
 					</div>
 				</div>
 			</div>
-			<div>
-				<a href=""><input type="button" value="이전화면" id="button1"></a>
-				<a href="" ><input type="button" value="결제하기" id="button2"></a>
+			<div class="paybtn">
+				<a href="store_main.jsp"><input type="button" value="이전화면"></a>
+				<a href="" ><input type="button" value="결제하기"></a>
 			</div>
 		</section>
 		<footer>

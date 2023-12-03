@@ -13,29 +13,44 @@
 		<header>
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
+						
+		<div id="menu_nav">
+			<nav>
+				<a href="${pageContext.request.contextPath}/reserve/movie_select.jsp">예매</a>
+				<a href="${pageContext.request.contextPath}/movie/release.jsp">영화</a>
+				<a href="${pageContext.request.contextPath}/theater/theater.jsp">극장정보</a>
+				<a href="${pageContext.request.contextPath}/store/store_main.jsp">스토어</a>
+				<a href="${pageContext.request.contextPath}/event/event_movie.jsp">이벤트</a>
+				<a href="${pageContext.request.contextPath}/cs/cs_main.jsp">고객센터</a>
+			</nav>
+		</div>
+		<hr id="top_hr">
+
 		<section id="content">
+			<h1 id="h01">시사회이벤트</h1>
+			<hr>
 			<nav class="event-menu">
 				<ul>
-			        <li><a href="event_movie.jsp">영화</a></li>
-			        <li><a href="event_theater.jsp">극장</a></li>
-			        <li><a href="event_partnership.jsp">제휴</a></li>
-			        <li class="active"><a href="event_preview.jsp">시사회</a></li>
+			        <li><a href="event_movie.jsp"><input type="button" value="영화"></a></li>
+			        <li><a href="event_theater.jsp"><input type="button" value="극장"></a></li>
+			        <li><a href="event_partnership.jsp"><input type="button" value="제휴"></a></li>
+			        <li class="active"><a href="event_preview.jsp"><input type="button" value="시사회"></a></li>
 				</ul>
 			</nav>
 		    <section class="event-section">
 		         <div class="container">
 			        <h1>진행 중인 이벤트</h1>
 			        <div class="event-grid">
-			        <c:forEach begin="1" end="4">
+			        <c:forEach begin="1" end="8">
 			            <div class="event">
 			            	<a href="event_detail.jsp" class="event_link">
-			            	<div class="event-image">
-				                <img src="https://img.megabox.co.kr/SharedImg/event/2023/11/21/GuvlkLZPAUjb8uk2ikaFSmI6C4E6GRtg.jpg" alt="이벤트 썸네일">
-				            </div>
-				            <div>
-				                <p class="event-title">이벤트 제목</p>
-				                <p class="event-date">2023. 11. 1 ~ 2023. 11. 30</p>
-				            </div>    
+				            	<div class="event-image">
+					                <img src="https://img.megabox.co.kr/SharedImg/event/2023/11/21/GuvlkLZPAUjb8uk2ikaFSmI6C4E6GRtg.jpg" alt="이벤트 썸네일">
+					            </div>
+					            <div>
+					                <p class="event-title">이벤트 제목</p>
+					                <p class="event-date">2023. 11. 1 ~ 2023. 11. 30</p>
+					            </div>    
 			                </a>
 			            </div>
 		            </c:forEach>

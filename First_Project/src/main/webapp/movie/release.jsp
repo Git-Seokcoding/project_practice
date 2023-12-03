@@ -13,7 +13,23 @@
 		<header>
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
+						
+		<div id="menu_nav">
+			<nav>
+				<a href="${pageContext.request.contextPath}/reserve/movie_select.jsp">예매</a>
+				<a href="${pageContext.request.contextPath}/movie/release.jsp">영화</a>
+				<a href="${pageContext.request.contextPath}/theater/theater.jsp">극장정보</a>
+				<a href="${pageContext.request.contextPath}/store/store_main.jsp">스토어</a>
+				<a href="${pageContext.request.contextPath}/event/event_movie.jsp">이벤트</a>
+				<a href="${pageContext.request.contextPath}/cs/cs_main.jsp">고객센터</a>
+			</nav>
+		</div>
+		<hr id="top_hr">
+		
+		
 		<section id="content">
+			<h1 id="h01">현재상영작</h1>
+			<hr>
 			<nav class="movie-menu">
 				<ul>
 					<li class="active"><a href="release.jsp">
@@ -21,12 +37,11 @@
 					<li><a href="comming.jsp">
 						<input type="button" value="상영예정작"></a></li>
 				</ul>
-				<hr>
 			</nav>
 			<section class="movie-section">
 				<div class="container">
 					<div class="movie-grid">
-					<c:forEach begin="1" end="20">
+					<c:forEach begin="1" end="16">
 						<div class="movie">
 							<a href="detail.jsp">
 							<div class="movie-poster">
